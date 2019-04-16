@@ -17,7 +17,7 @@ jobs:
           command: |
             echo "CHROME VERSION"
             google-chrome --version
-            apt-add-repository ppa:qameta/allure
+            add-apt-repository ppa:qameta/allure
             apt-get update
             apt-get install allure
       - run:
