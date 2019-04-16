@@ -16,7 +16,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            chmod 755 ./drivers/chromedriver
             pytest
       - store_artifacts:
           path: test-reports
