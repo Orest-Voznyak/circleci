@@ -12,8 +12,12 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
+      - run:
+          name: install 3rd party software
+          command: |
             echo "CHROME VERSION"
             google-chrome --version
+            sudo apt-get install allure
       - run:
           name: run tests
           command: |
