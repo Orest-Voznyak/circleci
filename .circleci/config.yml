@@ -13,13 +13,10 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
       - run:
-          name: install 3rd party software
+          name: install allure CLI
           command: |
-            echo "CHROME VERSION"
-            google-chrome --version
-            add-apt-repository ppa:qameta/allure
-            apt-get update
-            apt-get install allure
+            uname -a
+            sudo npm install -g allure-commandline --save-dev
       - run:
           name: run tests
           command: |
