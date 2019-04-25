@@ -14,3 +14,10 @@ class TestLogin:
         self.login_page.login_to_jira()
         assert self.header_page.at_page()
 
+    def test_login_to_jira_page_object_2(self):
+        self.login_page = LoginPage(self.driver)
+        self.header_page = HeaderPage(self.driver)
+        self.login_page.open()
+        assert self.login_page.at_page()
+        self.login_page.login_to_jira()
+        assert self.header_page.at_page()
