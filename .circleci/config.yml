@@ -22,7 +22,8 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            circleci tests glob tests/**/*.py | circleci tests split |
+            circleci tests glob tests/**/*.py
+            circleci tests split
             python3 -m pytest --alluredir ~/repo/raw_test_result_jsons
       - run:
           name: report
