@@ -19,7 +19,6 @@ jobs:
             sudo npm install -g allure-commandline --save-dev
       - run:
           name: run tests
-          parallelism: 4
           command: |
             . venv/bin/activate
             python3 -m pytest --alluredir ~/repo/raw_test_result_jsons
