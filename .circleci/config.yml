@@ -19,7 +19,7 @@ jobs:
             sudo npm install -g allure-commandline --save-dev
       - run:
           name: run tests
-          parallelism: 4
+          parallelism: 2
           command: |
             . venv/bin/activate
             circleci tests glob tests/**/*.py | circleci tests split --split-by=filesize |
