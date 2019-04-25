@@ -13,3 +13,4 @@ class TestLogin:
         assert self.login_page.at_page()
         self.login_page.login_to_jira()
         assert self.header_page.at_page()
+
