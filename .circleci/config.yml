@@ -22,8 +22,11 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            circleci tests glob tests/**/*.py | circleci tests split --split-by=timings |
+            circleci tests glob tests/**/*.py | circleci tests split |
             python3 -m pytest --alluredir ~/repo/raw_test_result_jsons
+      - run:
+          name: report
+          command: |
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
       - store_artifacts:
           path: test-reports
