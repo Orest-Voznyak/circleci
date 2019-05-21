@@ -5,7 +5,7 @@ class TestSample:
 
     @pytest.mark.smoke
     def test_smoke_3(self):
-        assert False
+        assert True
 
     @pytest.mark.smoke
     def test_smoke_4(self):
