@@ -35,14 +35,22 @@ jobs:
             TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
             python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - raw_test_result_jsons
+            - test-reports
+
       - run:
           name: report
           when: always
           command: |
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
 
-      - store_test_results:
-          path: test-reports
+
 
       - store_artifacts:
           path: test-reports
