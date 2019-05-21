@@ -37,6 +37,7 @@ jobs:
   report:
     docker:
       - image: circleci/python:3.6.6-stretch-node-browsers
+    working_directory: ~/repo
     steps:
       - run:
           name: install allure CLI
