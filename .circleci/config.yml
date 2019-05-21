@@ -35,6 +35,11 @@ jobs:
             TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
             python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
+      persist_to_workspace:
+        root: .
+        paths:
+          - raw_test_result_jsons
+
       - run:
           name: report
           when: always
