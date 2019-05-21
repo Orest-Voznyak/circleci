@@ -40,7 +40,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - attach_workspace:
-        at: raw_test_result_jsons
+          at: raw_test_result_jsons
 
       - run:
           name: install allure CLI
