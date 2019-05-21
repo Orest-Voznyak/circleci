@@ -8,7 +8,7 @@ class TestLogin:
 
     @pytest.mark.smoke
     def test_smoke(self):
-        assert False
+        assert True
 
     def test_login_to_jira_page_object(self):
         self.login_page = LoginPage(self.driver)

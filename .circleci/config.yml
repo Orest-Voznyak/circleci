@@ -26,11 +26,10 @@ jobs:
             python3 -m pytest -m smoke --alluredir ~/repo/raw_test_result_jsons
 
       - run:
-          when: always
           name: run regression tests
           command: |
             . venv/bin/activate
-            python3 -m pytest --alluredir ~/repo/raw_test_result_jsons
+            python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons
 
       - run:
           name: report
