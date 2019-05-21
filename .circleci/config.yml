@@ -39,6 +39,9 @@ jobs:
       - image: circleci/python:3.6.6-stretch-node-browsers
     working_directory: ~/repo
     steps:
+      - attach_workspace:
+        at: raw_test_result_jsons
+
       - run:
           name: install allure CLI
           command: |
