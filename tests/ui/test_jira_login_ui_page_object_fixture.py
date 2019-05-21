@@ -6,6 +6,10 @@ from src.pages.login_page import LoginPage
 @pytest.mark.usefixtures("get_driver")
 class TestLogin:
 
+    @pytest.mark.smoke
+    def test_smoke(self):
+        assert False
+
     def test_login_to_jira_page_object(self):
         self.login_page = LoginPage(self.driver)
         self.header_page = HeaderPage(self.driver)
