@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/python:3.6.6-stretch-node-browsers
     working_directory: ~/repo
@@ -36,14 +36,13 @@ jobs:
             python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
           root: .
-          # Must be relative path from root
           paths:
             - raw_test_result_jsons
             - test-reports
 
+  report:
+    steps:
       - run:
           name: report
           when: always
@@ -51,8 +50,12 @@ jobs:
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
 
 
+workflows:
+  version: 2
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-          when: always
+  btd:
+    jobs:
+      - test
+      - report:
+          requires:
+            - test
