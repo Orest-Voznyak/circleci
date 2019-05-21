@@ -28,9 +28,6 @@ jobs:
             TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
             python3 -m pytest -m smoke --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
-      - store_test_results:
-        path: test-results
-
       - run:
           name: run regression tests
           command: |
@@ -43,6 +40,9 @@ jobs:
           when: always
           command: |
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
+
+      - store_test_results:
+        path: ~/repo/test-reports
 
       - store_artifacts:
           path: test-reports
