@@ -36,6 +36,7 @@ jobs:
 
       - run:
           name: report
+          when: always
           command: |
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
 
