@@ -29,19 +29,6 @@ jobs:
             TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
             python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
-      - persist_to_workspace:
-          root: .
-          paths:
-            - raw_test_result_jsons
-
-  report:
-    docker:
-      - image: circleci/python:3.6.6-stretch-node-browsers
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: .
-
       - run:
           name: install allure CLI
           command: |
@@ -53,18 +40,6 @@ jobs:
           command: |
             allure generate -c ~/repo/raw_test_result_jsons -o ~/repo/test-reports
 
-      - store_artifacts:
+      - store_test_results:
           path: test-reports
-          destination: test-reports
           when: always
-
-
-workflows:
-  version: 2
-
-  btd:
-    jobs:
-      - test
-      - report:
-          requires:
-            - test
