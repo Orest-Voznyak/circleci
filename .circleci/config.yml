@@ -7,7 +7,7 @@ jobs:
     parallelism: 2
     steps:
      - checkout
-      - run:
+     - run:
           name: install dependencies
           command: |
            google-chrome --version
@@ -15,24 +15,24 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
 
-      - run:
-          name: run smoke tests
-          command: |
-           . venv/bin/activate
-            TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
-            python3 -m pytest -m smoke --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
+    - run:
+        name: run smoke tests
+        command: |
+         . venv/bin/activate
+          TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
+          python3 -m pytest -m smoke --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
-      - run:
-          name: run regression tests
-          command: |
-           . venv/bin/activate
-            TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
-            python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
+    - run:
+        name: run regression tests
+        command: |
+         . venv/bin/activate
+          TEST_FILES="$(circleci tests glob "tests/test_*.py" | circleci tests split --split-by=timings)"
+          python3 -m pytest -m "not smoke" --alluredir ~/repo/raw_test_result_jsons $TEST_FILES
 
-      - persist_to_workspace:
-          root: .
-          paths:
-           - raw_test_result_jsons
+    - persist_to_workspace:
+        root: .
+        paths:
+         - raw_test_result_jsons
 
   report:
     docker:
@@ -65,6 +65,6 @@ workflows:
   btd:
     jobs:
      - test
-      - report:
+     - report:
           requires:
            - test
