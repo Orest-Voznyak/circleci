@@ -6,8 +6,8 @@ jobs:
     working_directory: ~/repo
     parallelism: 2
     steps:
-     - checkout
-     - run:
+    - checkout
+    - run:
           name: install dependencies
           command: |
            google-chrome --version
