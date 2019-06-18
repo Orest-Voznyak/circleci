@@ -1,8 +1,6 @@
 version: 2
 
 workflows:
-  version: 2
-
   test_workflow:
     jobs:
      - test
