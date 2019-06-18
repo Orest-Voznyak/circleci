@@ -1,4 +1,15 @@
 version: 2
+
+workflows:
+  version: 2
+
+  test_workflow:
+    jobs:
+     - test
+     - report:
+          requires:
+           - test
+
 jobs:
   test:
     docker:
@@ -57,14 +68,3 @@ jobs:
           path: test-reports
           destination: test-reports
           when: always
-
-
-workflows:
-  version: 2
-
-  btd:
-    jobs:
-     - test
-     - report:
-          requires:
-           - test
